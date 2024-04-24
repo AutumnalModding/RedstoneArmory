@@ -9,6 +9,7 @@
 /asm/*
 /bin/*
 /libs/*
+/.idea/*
 
 #File Extensions
 *.psd
