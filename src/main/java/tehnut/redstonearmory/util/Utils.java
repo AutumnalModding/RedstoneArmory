@@ -132,7 +132,7 @@ public class Utils {
         if (Loader.isModLoaded(modid)) {
             try {
                 Class.forName(clazz.getCanonicalName());
-            } catch (ClassNotFoundException e) {
+            } catch (ClassNotFoundException | NoClassDefFoundError e) {
                 LogHelper.error("Could not find compatibility class for mod { " + modid + " }. Please report this.");
             }
         }

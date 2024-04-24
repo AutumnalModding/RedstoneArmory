@@ -4,6 +4,7 @@ import cofh.core.util.crafting.RecipeUpgrade;
 import cofh.lib.util.helpers.EnergyHelper;
 import cofh.thermalexpansion.item.ItemCapacitor;
 import cofh.thermalexpansion.item.TEItems;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -28,7 +29,7 @@ public class CompatibilityBaubles {
     }
 
     public static void addRecipes() {
-        if (ConfigHandler.enableCapacitorBaubleCrafting) {
+        if (ConfigHandler.enableCapacitorBaubleCrafting && Loader.isModLoaded("Thermal Expansion")) {
             GameRegistry.addRecipe(new ShapedOreRecipe(EnergyHelper.setDefaultEnergyTag(ItemCapacitorAmulet.getStackItem(EnergyType.TUBEROUS), EnergyType.TUBEROUS.capacity), " S ", "S S", " C ", 'S', "stringFluxed", 'C', EnergyHelper.setDefaultEnergyTag(new ItemStack(TEItems.itemCapacitor, 1, ItemCapacitor.Types.POTATO.ordinal()), ItemCapacitor.CAPACITY[ItemCapacitor.Types.POTATO.ordinal()])));
 
             for (int i = 2; i < EnergyType.values().length; i++) {

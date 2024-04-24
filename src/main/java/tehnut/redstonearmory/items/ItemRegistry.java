@@ -8,10 +8,13 @@ import tehnut.redstonearmory.items.armor.ItemEnderiumArmor;
 import tehnut.redstonearmory.items.armor.ItemLumiumArmor;
 import tehnut.redstonearmory.items.armor.ItemRedstoneArmor;
 import tehnut.redstonearmory.items.armor.ItemTuberousArmor;
-import tehnut.redstonearmory.items.powersuit.ItemPowersuit;
-import tehnut.redstonearmory.items.random.ItemThrowableNut;
 import tehnut.redstonearmory.items.tools.ItemPotahoeFluxed;
-import tehnut.redstonearmory.items.tools.gelidenderium.*;
+import tehnut.redstonearmory.items.tools.gelidenderium.ItemAxeGelidEnderium;
+import tehnut.redstonearmory.items.tools.gelidenderium.ItemBattleWrenchGelidEnderium;
+import tehnut.redstonearmory.items.tools.gelidenderium.ItemPickaxeGelidEnderium;
+import tehnut.redstonearmory.items.tools.gelidenderium.ItemShovelGelidEnderium;
+import tehnut.redstonearmory.items.tools.gelidenderium.ItemSickleGelidEnderium;
+import tehnut.redstonearmory.items.tools.gelidenderium.ItemSwordGelidEnderium;
 import tehnut.redstonearmory.util.annot.Register;
 
 public class ItemRegistry {

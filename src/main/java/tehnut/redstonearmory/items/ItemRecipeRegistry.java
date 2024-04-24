@@ -6,7 +6,7 @@ import cofh.lib.util.helpers.EnergyHelper;
 import cofh.redstonearsenal.item.RAItems;
 import cofh.thermalexpansion.item.TEItems;
 import cofh.thermalfoundation.item.TFItems;
-import com.enderio.core.common.transform.EnderCorePlugin;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -24,7 +24,7 @@ public class ItemRecipeRegistry {
         RecipeUtils.addStepUpRecipe(new ItemStack(Items.iron_ingot), "nuggetIron");
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemRegistry.materials, 1, 4), " NN", " N ", "NN ", 'N', "nuggetIron"));
 
-        if (ConfigHandler.enablePotahoeCrafting)
+        if (ConfigHandler.enablePotahoeCrafting && Loader.isModLoaded("Thermal Expansion"))
             GameRegistry.addRecipe(new ShapedOreRecipe(EnergyHelper.setDefaultEnergyTag(new ItemStack(ItemRegistry.potahoe), ItemPotahoeFluxed.capacity), "PC", " P", " P", 'P', Items.potato, 'C', TEItems.capacitorPotato));
 
         //Armor recipes
@@ -34,13 +34,7 @@ public class ItemRecipeRegistry {
             GameRegistry.addRecipe(new RecipeUpgrade(1, new ItemStack(ItemRegistry.armorEnderiumLeggings), new Object[]{"PLP", "P P", "P P", 'P', "platingEnderium", 'L', RAItems.armorFluxLegs}));
             GameRegistry.addRecipe(new RecipeUpgrade(7, new ItemStack(ItemRegistry.armorEnderiumBoots), new Object[]{"   ", "P P", "PBP", 'P', "platingEnderium", 'B', RAItems.armorFluxBoots}));
         }
-//        if (!EnderCorePlugin.runtimeDeobfEnabled && ConfigHandler.enableTestingEnviro && ItemRegistry.armorPowersuitChestplate != null) {
-//            GameRegistry.addRecipe(new ShapedOreRecipe(ItemRegistry.armorPowersuitHelm, "PPP", "P P", 'P', "platingCraftFull"));
-//            GameRegistry.addRecipe(new ShapedOreRecipe(ItemRegistry.armorPowersuitChestplate, "P P", "PPP", "PPP", 'P', "platingCraftFull"));
-//            GameRegistry.addRecipe(new ShapedOreRecipe(ItemRegistry.armorPowersuitLeggings, "PPP", "P P", "P P", 'P', "platingCraftFull"));
-//            GameRegistry.addRecipe(new ShapedOreRecipe(ItemRegistry.armorPowersuitBoots, "P P", "P P", 'P', "platingCraftFull"));
-//        }
-        if (ConfigHandler.enableLumiumArmorCrafting) {
+        if (ConfigHandler.enableLumiumArmorCrafting && Loader.isModLoaded("Thermal Foundation")) {
             GameRegistry.addRecipe(new ShapedOreRecipe(ItemRegistry.armorLumiumHelm, "PPP", "P P", 'P', "ingotLumium"));
             GameRegistry.addRecipe(new ShapedOreRecipe(ItemRegistry.armorLumiumChestplate, "P P", "PPP", "PPP", 'P', "ingotLumium"));
             GameRegistry.addRecipe(new ShapedOreRecipe(ItemRegistry.armorLumiumLeggings, "PPP", "P P", "P P", 'P', "ingotLumium"));
@@ -75,10 +69,12 @@ public class ItemRecipeRegistry {
     }
 
     private static void registerMachineRecipes() {
-        ThermalExpansionHelper.addTransposerFill(12000, RAItems.gemCrystalFlux, new ItemStack(ItemRegistry.materials, 1, 2), new FluidStack(FluidRegistry.getFluid("cryotheum"), 1000), false);
-        ThermalExpansionHelper.addTransposerFill(12000, TFItems.ingotEnderium, new ItemStack(ItemRegistry.materials, 1, 0), new FluidStack(FluidRegistry.getFluid("cryotheum"), 1000), false);
-        ThermalExpansionHelper.addTransposerFill(12000, new ItemStack(ItemRegistry.armorPlating, 1, 5), new ItemStack(ItemRegistry.armorPlating, 1, 6), new FluidStack(FluidRegistry.getFluid("mana"), 1000), false);
-        ThermalExpansionHelper.addTransposerFill(6000, new ItemStack(Items.string), new ItemStack(ItemRegistry.materials, 1, 6), new FluidStack(FluidRegistry.getFluid("redstone"), 200), false);
+        if (Loader.isModLoaded("Thermal Expansion")) {
+            ThermalExpansionHelper.addTransposerFill(12000, RAItems.gemCrystalFlux, new ItemStack(ItemRegistry.materials, 1, 2), new FluidStack(FluidRegistry.getFluid("cryotheum"), 1000), false);
+            ThermalExpansionHelper.addTransposerFill(12000, TFItems.ingotEnderium, new ItemStack(ItemRegistry.materials, 1, 0), new FluidStack(FluidRegistry.getFluid("cryotheum"), 1000), false);
+            ThermalExpansionHelper.addTransposerFill(12000, new ItemStack(ItemRegistry.armorPlating, 1, 5), new ItemStack(ItemRegistry.armorPlating, 1, 6), new FluidStack(FluidRegistry.getFluid("mana"), 1000), false);
+            ThermalExpansionHelper.addTransposerFill(6000, new ItemStack(Items.string), new ItemStack(ItemRegistry.materials, 1, 6), new FluidStack(FluidRegistry.getFluid("redstone"), 200), false);
+        }
     }
 
     private static void registerLateShapedRecipes() {
@@ -101,12 +97,10 @@ public class ItemRecipeRegistry {
             GameRegistry.addRecipe(new RecipeUpgrade(new ItemStack(ItemRegistry.swordGelidEnderium), new Object[]{" I ", " T ", " R ", 'R', "rodGelid", 'T', RAItems.itemSwordFlux, 'I', "ingotGelidEnderium"}));
 
         //armor plating
-        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemRegistry.armorPlating, 1, 0), "NNN", "GIG", "NNN", 'N', "nuggetEnderium", 'G', "gemCrystalFlux", 'I', "ingotEnderium"));
-//        if (!EnderCorePlugin.runtimeDeobfEnabled && ConfigHandler.enableTestingEnviro && ItemRegistry.armorPowersuitChestplate != null)
-//            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemRegistry.armorPlating, 1, 1), "NNN", "GIG", "NNN", 'N', "chainLink", 'G', "dustRedstone", 'I', "ingotIron"));
-
-        //temporary mana bucket recipe until CoFH add one
-        GameRegistry.addShapelessRecipe(TFItems.bucketMana, TFItems.bucketCryotheum, TFItems.bucketEnder, TFItems.bucketPyrotheum, TFItems.bucketRedstone, TFItems.bucketCoal, TFItems.bucketGlowstone);
+        if (Loader.isModLoaded("Thermal Foundation")) {
+            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemRegistry.armorPlating, 1, 0), "NNN", "GIG", "NNN", 'N', "nuggetEnderium", 'G', "gemCrystalFlux", 'I', "ingotEnderium"));
+            GameRegistry.addShapelessRecipe(TFItems.bucketMana, TFItems.bucketCryotheum, TFItems.bucketEnder, TFItems.bucketPyrotheum, TFItems.bucketRedstone, TFItems.bucketCoal, TFItems.bucketGlowstone);
+        }
     }
 
     //Internal/vanilla only recipes go here
