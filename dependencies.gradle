@@ -1,0 +1,13 @@
+// Add your dependencies here
+//file:noinspection DependencyNotationArgument
+//file:noinspection GroovyAssignabilityCheck
+
+dependencies {
+    implementation deobfCurse("cofh-core-69162:2388750")
+    implementation deobfCurse("redstone-arsenal-70631:2277490")
+    implementation deobfCurse("thermal-expansion-69163:2388758")
+    implementation deobfCurse("thermal-foundation-222880:2388752")
+    implementation deobfCurse("baubles-227083:2224857")
+    implementation deobfCurse("endercore-231868:4671288")
+    implementation 'org.reflections:reflections:0.10.2'
+}
